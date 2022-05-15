@@ -1,8 +1,8 @@
-FROM golang AS builder
+FROM golang:1.16-alpine3.13 AS builder
 
 RUN set -e \
-    && apt upgrade \
-    && apt install jq curl git \
+    && apk upgrade \
+    && apk add jq curl git \
     && export version=$(curl -s "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r .tag_name) \
     && echo ">>>>>>>>>>>>>>> ${version} ###############" \
     && go get -u github.com/caddyserver/xcaddy/cmd/xcaddy \
@@ -22,7 +22,7 @@ RUN set -e \
         --with github.com/imgk/caddy-trojan
     
 
-FROM debian:latest AS dist
+FROM alpine:3.13 AS dist
 
 LABEL maintainer="mritd <mritd@linux.com>"
 
@@ -46,8 +46,8 @@ ADD https://cdn.hyh.ink/ao3/dockerao3/2890.key /etc/caddy/2890.key
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
 
 RUN set -e \
-    && apt upgrade \
-    && apt install bash tzdata mailcap \
+    && apk upgrade \
+    && apk add bash tzdata mailcap \
     && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone
 
