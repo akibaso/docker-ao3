@@ -34,9 +34,9 @@ ENV TZ Asia/Shanghai
 
 COPY --from=builder /caddy /usr/bin/caddy
 ADD https://cdn.hyh.ink/ao3/dockerao3/ao3.caddyfile /etc/caddy/Caddyfile
-ADD https://ao3.akiba.ga/disclaimer.html /usr/share/caddy/disclaimer.html
-ADD https://ao3.akiba.ga/offline.html /usr/share/caddy/offline.html
-ADD https://ao3.akiba.ga/sw.js /usr/share/caddy/sw.js
+ADD https://cdn.hyh.ink/ao3/disclaimer.html /usr/share/caddy/disclaimer.html
+ADD https://cdn.hyh.ink/ao3/offline.html /usr/share/caddy/offline.html
+ADD https://cdn.hyh.ink/ao3/sw.js /usr/share/caddy/sw.js
 ADD https://cdn.hyh.ink/ao3/dockerao3/2890.pem /etc/caddy/2890.pem
 ADD https://cdn.hyh.ink/ao3/dockerao3/2890.key /etc/caddy/2890.key
 
