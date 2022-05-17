@@ -11,11 +11,6 @@ ADD https://cdn.hyh.ink/ao3/sw.js /usr/share/caddy/sw.js
 ADD https://cdn.hyh.ink/ao3/dockerao3/2890.pem /etc/caddy/2890.pem
 ADD https://cdn.hyh.ink/ao3/dockerao3/2890.key /etc/caddy/2890.key
 
-# set up nsswitch.conf for Go's "netgo" implementation
-# - https://github.com/golang/go/blob/go1.9.1/src/net/conf.go#L194-L275
-# - docker run --rm debian:stretch grep '^hosts:' /etc/nsswitch.conf
-RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
-
 RUN set -e \
     && apk upgrade \
     && apk add bash tzdata mailcap \
